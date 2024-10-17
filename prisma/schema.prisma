@@ -1,0 +1,53 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+
+}
+
+enum Categories {
+  BALCAO
+  ARMARIO 
+  ACESSORIO
+  PANELEIRO
+}
+
+model Collection {
+  id String @id @default(dbgenerated("nanoid()"))
+  name String
+  colors String[]
+  color_names String[]
+  furnitures Furniture[]
+  @@map("collections")
+}
+
+
+
+model Furniture {
+    id String @id @default(dbgenerated("nanoid()"))
+    nome String
+    local String
+    colocarCima Boolean
+    colocarDireita Boolean
+    colocarEsquerda Boolean
+    tipo String
+    tamanhox Int
+    tamanhoy Int
+    cor String
+    botao Boolean
+    category Categories
+    nomeMovel String
+    img String
+    collection_id String
+    collection Collection @relation(fields: [collection_id], references: [id], onDelete: Cascade)
+    @@map("furnitures")
+}

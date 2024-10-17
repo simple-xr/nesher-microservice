@@ -85,7 +85,7 @@ export class FilesService {
     const uploadPartObject = new UploadPartCommand(params);
     try {
       const response = await s3Client.send(uploadPartObject);
-    
+
       return { Etag: response.ETag };
     } catch (e) {
       throw new BadRequestException(e.message);
@@ -111,6 +111,27 @@ export class FilesService {
       return { fileUrl: complete.Location };
     } catch (e) {
       throw new BadRequestException(e.message);
+    }
+  }
+  async uploadFromBase64(
+    file64: string,
+    folder: string,
+    name: string,
+    contentType: string,
+  ) {
+    const fileKey = `${folder}/${Date.now()}-${name}`;
+    const uploadObject = new PutObjectCommand({
+      Bucket: process.env.S3_BUCKET,
+      Key: fileKey,
+      Body: Buffer.from(file64, 'base64'),
+      ContentType: `${contentType}`,
+    });
+    try {
+      const response = await s3Client.send(uploadObject);
+
+      return `${process.env.BUCKET_URL}${encodeURI(fileKey)}`;
+    } catch (error) {
+      throw new BadRequestException(error);
     }
   }
 }
