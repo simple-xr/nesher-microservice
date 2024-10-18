@@ -188,4 +188,3 @@ Desenvolvido por:
 
 **David Facó** - Desenvolvedor Back End pleno
 
-**Bruno Bastos** - Desenvolvedor Fullstack pleno
