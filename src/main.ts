@@ -6,8 +6,8 @@ import { ValidationPipe } from '@nestjs/common';
 import { json } from 'body-parser';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
-
 async function bootstrap() {
+  const port = process.env.PORT || 3000
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
   app.useStaticAssets(join(__dirname, '..', 'public'));
   app.setBaseViewsDir(join(__dirname, '..', 'views'));
@@ -17,7 +17,9 @@ async function bootstrap() {
   app.enableCors();
   const config = new DocumentBuilder()
     .setTitle('Nesher - File Server Microservice')
-    .setDescription('Microserviço de fileserver para o configurador nesher da Bugaboo Studio')
+    .setDescription(
+      'Microserviço de fileserver para o configurador nesher da Bugaboo Studio',
+    )
     .setVersion('0.01')
     .addTag('Nesher, Móveleiro, Bugaboo')
     .addBearerAuth()
@@ -25,7 +27,9 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('docs', app, document);
 
-  console.log(`Nesher File Server API Started at port ${3000}`);
-  await app.listen(3000);
+  console.log(
+    `Nesher File Server API Started at port ${port}`,
+  );
+  await app.listen(port);
 }
 bootstrap();
