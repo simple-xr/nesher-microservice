@@ -12,12 +12,15 @@ import { UpdateFurnitureDto } from '../../dto/update-furniture.dto';
 export class FurnituresPrismaRepository implements FurnituresRepository {
   constructor(private readonly prisma: PrismaService) {}
   async create(data: CreateFurnitureDto): Promise<Furniture> {
+    const nomeMovelArray = ['Balcões', 'Armários', 'Paneleiros', 'Acessórios'];
+    const nameCategories = ['BALCAO', 'ARMARIO', 'PANELEIRO', 'ACESSORIO'];
     const { collection_id, ...cleanedData } = data;
     return plainToInstance(
       Furniture,
       await this.prisma.furniture.create({
         data: {
           ...cleanedData,
+          nomeMovel: nomeMovelArray[nameCategories.indexOf(data.category)],
           collection: {
             connect: {
               id: data.collection_id,

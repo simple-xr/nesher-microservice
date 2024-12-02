@@ -38,9 +38,6 @@ export class CreateFurnitureDto {
   @IsIn(['BALCAO', 'ARMARIO', 'PANELEIRO', 'ACESSORIO'])
   category: 'BALCAO' | 'ARMARIO' | 'PANELEIRO' | 'ACESSORIO';
   @IsString()
-  @IsIn(['Balcões', 'Armários', 'Paneleiros', 'Acessórios'])
-  nomeMovel: string;
-  @IsString()
   @IsUrl()
   img: string;
   @IsString()
