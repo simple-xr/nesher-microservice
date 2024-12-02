@@ -59,7 +59,7 @@ export class CollectionsPrismaRepository implements CollectionsRepository {
       Collection,
       await this.prisma.collection.update({
         where: { id },
-        data: git { ...data, updated_at: new Date() },,
+        data: { ...data, updated_at: new Date() },
       }),
     );
   }
