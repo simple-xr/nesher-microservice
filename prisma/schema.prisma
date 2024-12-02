@@ -27,6 +27,8 @@ model Collection {
   colors String[]
   color_names String[]
   furnitures Furniture[]
+  created_at DateTime @default(now())
+  updated_at DateTime? 
   @@map("collections")
 }
 
@@ -49,5 +51,7 @@ model Furniture {
     img String
     collection_id String
     collection Collection @relation(fields: [collection_id], references: [id], onDelete: Cascade)
+    created_at DateTime @default(now())
+    updated_at DateTime?
     @@map("furnitures")
 }

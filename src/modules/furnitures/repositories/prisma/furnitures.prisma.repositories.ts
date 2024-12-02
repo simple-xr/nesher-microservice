@@ -72,7 +72,8 @@ export class FurnituresPrismaRepository implements FurnituresRepository {
       Furniture,
       await this.prisma.furniture.update({
         where: { id },
-        data: data,
+        data: { ...data, updated_at: new Date() },
+
         include: {
           collection: true,
         },
