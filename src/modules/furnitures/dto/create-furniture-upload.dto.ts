@@ -99,9 +99,6 @@ export class CreateFurnitureUploadDto {
     description: 'nome da categoria por extenso para uso pelo front end.',
     required: true,
   })
-  @IsString()
-  @IsIn(['Balcões', 'Armários', 'Paneleiros', 'Acessórios'])
-  nomeMovel: string;
   @ApiProperty({
     description: 'Objeto com extensão, mimetype e string base64 da thumbnail do móvel.',
     required: true,
