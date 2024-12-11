@@ -45,7 +45,7 @@ model Furniture {
     tipo String
     tamanhox Int
     tamanhoy Int
-    cor String
+    cor String[]
     botao Boolean
     category Categories
     nomeMovel String

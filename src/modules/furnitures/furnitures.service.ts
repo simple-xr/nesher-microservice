@@ -15,6 +15,7 @@ export class FurnituresService {
     private readonly collectionsService: CollectionsService,
   ) {}
   async create(data: CreateFurnitureUploadDto) {
+    console.log('passou aqui')
     const collection = await this.collectionsService.findOne(
       data.collection_id,
     );

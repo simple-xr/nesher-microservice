@@ -30,7 +30,7 @@ export class CreateFurnitureDto {
   @IsNumber()
   tamanhoy: number;
   @IsString()
-  cor: string;
+  cor: string[];
   @IsBoolean()
   @IsOptional()
   botao: boolean;

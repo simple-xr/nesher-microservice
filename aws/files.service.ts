@@ -131,7 +131,7 @@ export class FilesService {
 
       return `${process.env.BUCKET_URL}${encodeURI(fileKey)}`;
     } catch (error) {
-      throw new BadRequestException(error);
+      throw new BadRequestException(error.message);
     }
   }
 }

@@ -11,7 +11,7 @@ export class Furniture {
     tipo: string
     tamanhox: number
     tamanhoy: number
-    cor: string
+    cor: string[]
     botao: boolean
     category: "BALCAO" | "ARMARIO" | "PANELEIRO" | "ACESSORIO"
     nomeMovel: string
