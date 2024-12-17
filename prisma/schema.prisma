@@ -55,5 +55,6 @@ model Furniture {
     created_at DateTime @default(now())
     updated_at DateTime?
     active Boolean @default(true)
+    canto Boolean @default(false)
     @@map("furnitures")
 }

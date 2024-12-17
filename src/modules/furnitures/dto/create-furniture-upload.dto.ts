@@ -91,6 +91,9 @@ export class CreateFurnitureUploadDto {
   @IsBoolean()
   @IsOptional()
   botao: boolean;
+  @IsBoolean()
+  @IsOptional()
+  canto: boolean;
   @ApiProperty({
     example: 'BALCAO',
     description: 'define a categoria a qual o móvel pertence.',

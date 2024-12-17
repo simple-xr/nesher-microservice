@@ -13,6 +13,7 @@ export class Furniture {
     tamanhoy: number
     cor: string[]
     botao: boolean
+    canto: boolean
     category: "BALCAO" | "ARMARIO" | "PANELEIRO" | "ACESSORIO"
     nomeMovel: string
     img: string
