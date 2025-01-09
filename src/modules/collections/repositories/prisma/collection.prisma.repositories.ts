@@ -36,7 +36,7 @@ export class CollectionsPrismaRepository implements CollectionsRepository {
         furnitures: true,
       },
       orderBy: {
-        order: 'desc',
+        order: 'asc',
       },
     });
 
