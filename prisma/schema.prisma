@@ -30,6 +30,7 @@ model Collection {
   created_at DateTime @default(now())
   updated_at DateTime? 
   active Boolean @default(true)
+  order Int @default(0)
   @@map("collections")
 }
 

@@ -33,7 +33,10 @@ export class CollectionsPrismaRepository implements CollectionsRepository {
       take: perPage,
       skip: (page - 1) * perPage,
       include: {
-        furnitures:true
+        furnitures: true,
+      },
+      orderBy: {
+        order: 'desc',
       },
     });
 
