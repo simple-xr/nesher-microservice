@@ -41,7 +41,7 @@ export class FurnituresPrismaRepository implements FurnituresRepository {
     };
 
     if (cor) {
-      searchParams[cor] = {
+      searchParams['cor'] = {
         has: cor,
       };
     }
