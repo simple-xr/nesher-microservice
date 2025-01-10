@@ -44,7 +44,7 @@ export class FurnituresPrismaRepository implements FurnituresRepository {
         where: {
           ...filterParams,
           cor: {
-            has: cor,
+            hasSome: [cor],
           },
         },
         take: perPage,
@@ -52,9 +52,9 @@ export class FurnituresPrismaRepository implements FurnituresRepository {
         include: {
           collection: true,
         },
-        orderBy:{
-          order:'desc'
-        }
+        orderBy: {
+          order: 'desc',
+        },
       }),
     );
 
