@@ -35,6 +35,7 @@ export class FurnituresPrismaRepository implements FurnituresRepository {
   }
   async findAll(params: FurnitureParamsDto): Promise<any> {
     var { page, perPage, cor, ...filterParams } = params;
+    console.log(cor);
 
     if (!page) page = 1;
     if (!perPage) perPage = 5;
@@ -44,7 +45,7 @@ export class FurnituresPrismaRepository implements FurnituresRepository {
         where: {
           ...filterParams,
           cor: {
-            hasSome: cor ? [cor] : null,
+            hasSome: cor ? [cor] : [],
           },
         },
         take: perPage,
