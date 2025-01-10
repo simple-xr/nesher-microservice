@@ -16,7 +16,11 @@ export class CollectionsPrismaRepository implements CollectionsRepository {
       await this.prisma.collection.create({
         data: data,
         include: {
-          furnitures: true,
+          furnitures: {
+            orderBy: {
+              order: 'desc',
+            },
+          },
         },
       }),
     );
@@ -33,7 +37,11 @@ export class CollectionsPrismaRepository implements CollectionsRepository {
       take: perPage,
       skip: (page - 1) * perPage,
       include: {
-        furnitures: true,
+        furnitures: {
+          orderBy: {
+            order: 'desc',
+          },
+        },
       },
       orderBy: {
         order: 'asc',
@@ -53,7 +61,11 @@ export class CollectionsPrismaRepository implements CollectionsRepository {
       Collection,
       this.prisma.collection.findUniqueOrThrow({
         where: { id },
-        include: { furnitures: true },
+        include: { furnitures: {
+          orderBy: {
+            order: 'desc',
+          },
+        } },
       }),
     );
   }
