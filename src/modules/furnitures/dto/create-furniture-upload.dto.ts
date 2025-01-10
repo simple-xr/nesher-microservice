@@ -5,6 +5,7 @@ import {
   IsBoolean,
   IsHexColor,
   IsIn,
+  IsInt,
   IsNumber,
   IsObject,
   IsOptional,
@@ -121,4 +122,7 @@ export class CreateFurnitureUploadDto {
   })
   @IsString()
   collection_id: string;
+  @IsNumber()
+  @IsInt()
+  order: number;
 }

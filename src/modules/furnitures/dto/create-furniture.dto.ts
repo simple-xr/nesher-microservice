@@ -3,6 +3,7 @@ import {
   IsBoolean,
   IsHexColor,
   IsIn,
+  IsInt,
   IsNumber,
   IsOptional,
   IsString,
@@ -42,4 +43,7 @@ export class CreateFurnitureDto {
   img: string;
   @IsString()
   collection_id: string;
+  @IsNumber()
+    @IsInt()
+    order: number;
 }

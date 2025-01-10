@@ -52,6 +52,9 @@ export class FurnituresPrismaRepository implements FurnituresRepository {
         include: {
           collection: true,
         },
+        orderBy:{
+          order:'desc'
+        }
       }),
     );
 

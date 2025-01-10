@@ -20,4 +20,5 @@ export class Furniture {
     collection_id: string
     @Type(()=>Collection)
     collection?: Collection
+    order: number
 }
