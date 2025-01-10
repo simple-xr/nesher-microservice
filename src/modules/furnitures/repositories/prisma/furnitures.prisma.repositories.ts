@@ -36,18 +36,22 @@ export class FurnituresPrismaRepository implements FurnituresRepository {
   async findAll(params: FurnitureParamsDto): Promise<any> {
     var { page, perPage, cor, ...filterParams } = params;
     console.log(cor);
+    const searchParams = {
+      ...filterParams,
+    };
+
+    if (cor) {
+      searchParams[cor] = {
+        has: cor,
+      };
+    }
 
     if (!page) page = 1;
     if (!perPage) perPage = 5;
     const furnitures = plainToInstance(
       Furniture,
       await this.prisma.furniture.findMany({
-        where: {
-          ...filterParams,
-          cor: {
-            hasSome: cor ? [cor] : [],
-          },
-        },
+        where: searchParams,
         take: perPage,
         skip: (page - 1) * perPage,
         include: {
