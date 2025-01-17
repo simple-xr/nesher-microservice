@@ -5,6 +5,7 @@ import { ConfigModule } from '@nestjs/config';
 import { FilesService } from 'aws/files.service';
 import { CollectionsModule } from './modules/collections/collections.module';
 import { FurnituresModule } from './modules/furnitures/furnitures.module';
+import { ScenesModule } from './modules/scenes/scenes.module';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { FurnituresModule } from './modules/furnitures/furnitures.module';
     }),
     CollectionsModule,
     FurnituresModule,
+    ScenesModule,
   ],
   controllers: [AppController],
   providers: [AppService, FilesService],

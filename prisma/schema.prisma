@@ -14,6 +14,11 @@ datasource db {
 
 }
 
+model Scenes{
+  id String @id @default(dbgenerated("nanoid()"))
+  glb String
+}
+
 enum Categories {
   BALCAO
   ARMARIO 
