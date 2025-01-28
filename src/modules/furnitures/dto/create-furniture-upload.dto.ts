@@ -59,7 +59,7 @@ export class CreateFurnitureUploadDto {
     required: true,
   })
   @IsString()
-  @IsIn(['cima', 'chao', 'pia'])
+  @IsIn(['cima', 'chao', 'pia', 'bancada_pia'])
   tipo: string;
   @ApiProperty({
     example: 2,

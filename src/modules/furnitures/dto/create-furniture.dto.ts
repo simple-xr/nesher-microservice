@@ -24,7 +24,7 @@ export class CreateFurnitureDto {
   @IsBoolean()
   colocarEsquerda: boolean;
   @IsString()
-  @IsIn(['cima', 'chao'])
+  @IsIn(['cima', 'chao', 'pia', 'bancada_pia'])
   tipo: string;
   @IsNumber()
   tamanhox: number;
@@ -44,6 +44,6 @@ export class CreateFurnitureDto {
   @IsString()
   collection_id: string;
   @IsNumber()
-    @IsInt()
-    order: number;
+  @IsInt()
+  order: number;
 }
