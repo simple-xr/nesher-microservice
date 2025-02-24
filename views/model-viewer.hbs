@@ -1,14 +1,147 @@
-<html>
-  <style>#ar-button{ cursor: pointer; padding: 0; border: none; background:
-    none; color: inherit; width: 105px; height: 120px; background-image:
-    url(https://nesher-bucket.s3.amazonaws.com/assets/ra-btn.svg);
-    background-size: cover; position: absolute; right: 50px; bottom: 50px;}</style>
-  <script
-    type='module'
-    src='https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js'
-  ></script>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Experiência de Realidade Aumentada</title>
+  <style>
+    /* Estilos CSS */
+    body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Titillium Web', sans-serif;
+            background-color: #f5f5f5;
+        }
+
+        .texto {
+            font-family: 'Titillium Web';
+            font-weight: 200;
+            font-size: 25px;
+            line-height: 32px;
+            letter-spacing: 0%;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .imagem {
+            width: 100%;
+            max-width: 300px;
+            margin: 20px 0;
+        }
+
+        .botao {
+            width: 334px;
+            height: 59px;
+            border-radius: 400px;
+            background-color: #131312;
+            color: white;
+            font-family: 'Titillium Web';
+            font-weight: 600;
+            font-size: 18px;
+            line-height: 27.38px;
+            letter-spacing: 1%;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            margin: 20px 0;
+            border: none;
+        }
+
+        .botao:hover {
+            background-color: #131312;
+            opacity: 0.9;
+        }
+
+    
+      model-viewer{
+        width: 100%;
+        height: 100%;
+      }
+   
+
+    /* Esconde elementos em desktop */
+    @media (min-width: 900px) {
+      .mobile-only {
+        display: none;
+      }
+      body{
+        display: block;
+        width: 100vw;
+        height: 100vh;
+      }
+     
+    }
+
+    /* Esconde elementos em mobile */
+    @media (max-width: 800px) {
+      .desktop-only {
+        display: none;
+      }
+    .texto {
+                font-size: 20px;
+                line-height: 28px;
+            }
+
+            .botao {
+                width: 280px;
+                height: 50px;
+                font-size: 16px;
+                line-height: 24px;
+            }
+    }
+
+     @media (min-width: 800px) and (max-width: 1024px) {
+      .desktop-only {
+        display: none;
+      }
+            .texto {
+                font-size: 30px;
+                line-height: 38px;
+                margin: 30px 0;
+            }
+
+            .imagem {
+                max-width: 400px;
+                margin: 30px 0;
+            }
+
+            .botao {
+                width: 400px;
+                height: 70px;
+                font-size: 22px;
+                line-height: 30px;
+                margin: 30px 0;
+            }
+        }
+
+   
+    
+  </style>
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+</head>
+<body>
+
+<div class="texto mobile-only">
+        Veja e mova o produto pela sua casa (AR)
+    </div>
+
+    <img src="https://nesher-bucket.s3.us-east-1.amazonaws.com/tabletpopup.png" alt="imagem-cadeira 1" class="imagem mobile-only">
+    <img src="https://nesher-bucket.s3.us-east-1.amazonaws.com/imagem.jpeg" alt="Imagem 2" class="imagem mobile-only">
+
+    <button id="open-ar-button" class="mobile-only botao">
+        Teste o produto na sua casa
+    </button>
+
   <model-viewer
     ar
+    ar-modes="scene-viewer quick-look"
     id='model-viewer'
     shadow-intensity='1'
     exposure='1'
@@ -16,6 +149,27 @@
     src={{scene}}
     camera-controls
     alt='A 3D model of your scene.'
-    style='width: 100%; height: 100%'
-  ><button slot='ar-button' id='ar-button'></button></model-viewer>
+    
+  ><button slot='ar-button' id='ar-button'></button>
+  </model-viewer>
+
+  <script>
+    // Script JavaScript
+    window.addEventListener('load', function () {
+      console.log("carregou.")
+      const openARButton = document.getElementById('open-ar-button');
+      const arButton = document.getElementById('ar-button');
+
+      // Adiciona um listener ao botão "Seguir para RA"
+      openARButton.addEventListener('click', function () {
+        // Verifica se o botão AR está disponível
+        if (arButton) {
+          arButton.click(); // Simula o clique no botão AR
+        } else {
+          console.error('Botão AR não encontrado.');
+        }
+      });
+    });
+  </script>
+</body>
 </html>
