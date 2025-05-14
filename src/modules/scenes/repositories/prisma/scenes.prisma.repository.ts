@@ -30,5 +30,5 @@ export class ScenesPrismaRepository implements ScenesRepository {
     return await this.prisma.scenes.findMany({});
   }
 
-  // TODO: Implement scenes repository using Prisma
+ 
 }

@@ -36,6 +36,8 @@ model Collection {
   updated_at DateTime? 
   active Boolean @default(true)
   order Int @default(0)
+  documents Document[]
+  pictures Picture[]
   @@map("collections")
 }
 
@@ -65,3 +67,19 @@ model Furniture {
     order Float @default(0)
     @@map("furnitures")
 }
+
+model Document {
+  id String @id @default(dbgenerated("nanoid()"))
+  collection_id String
+  collection Collection @relation(fields: [collection_id], references: [id], onDelete: Cascade)
+  url String
+}
+
+model Picture {
+  id String @id @default(dbgenerated("nanoid()"))
+  collection_id String
+  collection Collection @relation(fields: [collection_id], references: [id], onDelete: Cascade)
+  url String
+}
+
+

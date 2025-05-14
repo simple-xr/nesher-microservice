@@ -6,6 +6,8 @@ import { FilesService } from 'aws/files.service';
 import { CollectionsModule } from './modules/collections/collections.module';
 import { FurnituresModule } from './modules/furnitures/furnitures.module';
 import { ScenesModule } from './modules/scenes/scenes.module';
+import { DocumentsModule } from './modules/documents/documents.module';
+import { PicturesModule } from './modules/pictures/pictures.module';
 
 @Module({
   imports: [
@@ -15,6 +17,8 @@ import { ScenesModule } from './modules/scenes/scenes.module';
     CollectionsModule,
     FurnituresModule,
     ScenesModule,
+    DocumentsModule,
+    PicturesModule,
   ],
   controllers: [AppController],
   providers: [AppService, FilesService],

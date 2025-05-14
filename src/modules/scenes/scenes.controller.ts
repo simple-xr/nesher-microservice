@@ -63,11 +63,9 @@ export class ScenesController {
     return this.scenesService.findAll();
   }
 
-  @Render('model-viewer')
   @Get(':id')
-  async findOne(@Param('id', SceneExistPipe) id: string) {
-    const scene = await this.scenesService.findOne(id);
-    return { scene: scene.glb };
+  findOne(@Param('id', SceneExistPipe) id: string) {
+    return this.scenesService.findOne(id);
   }
 
   @Delete(':id')
