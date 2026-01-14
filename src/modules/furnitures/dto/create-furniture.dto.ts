@@ -1,5 +1,7 @@
-import { Type } from 'class-transformer';
+import { Transform, Type } from 'class-transformer';
 import {
+  ArrayMinSize,
+  IsArray,
   IsBoolean,
   IsHexColor,
   IsIn,
@@ -17,10 +19,13 @@ export class CreateFurnitureDto {
   @IsString()
   @IsUrl()
   local: string;
+
   @IsBoolean()
   colocarCima: boolean;
+
   @IsBoolean()
   colocarDireita: boolean;
+
   @IsBoolean()
   colocarEsquerda: boolean;
   @IsString()
@@ -30,11 +35,17 @@ export class CreateFurnitureDto {
   tamanhox: number;
   @IsNumber()
   tamanhoy: number;
-  @IsString()
+  @Transform(({ value }) => value.split(',').map((item) => item.trim()))
+  @IsArray()
+  @ArrayMinSize(1)
   cor: string[];
+
   @IsBoolean()
   @IsOptional()
   botao: boolean;
+  @IsBoolean()
+  @IsOptional()
+  canto: boolean;
   @IsString()
   @IsIn(['BALCAO', 'ARMARIO', 'PANELEIRO', 'ACESSORIO'])
   category: 'BALCAO' | 'ARMARIO' | 'PANELEIRO' | 'ACESSORIO';

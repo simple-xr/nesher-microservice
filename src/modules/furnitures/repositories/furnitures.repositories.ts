@@ -7,6 +7,6 @@ export abstract class FurnituresRepository {
   abstract create(data: CreateFurnitureDto): Promise<Furniture>;
   abstract findAll(params: FurnitureParamsDto): Promise<any>;
   abstract findOne(id: string): Promise<Furniture>;
-  abstract update(id: string, data: UpdateFurnitureDto): Promise<Furniture>;
+  abstract update(id: string, data: UpdateFurnitureDto, glb: string|undefined, img: string|undefined): Promise<Furniture>;
   abstract delete(id: string): Promise<Furniture>;
 }

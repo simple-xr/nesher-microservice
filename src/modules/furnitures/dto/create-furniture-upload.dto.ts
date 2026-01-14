@@ -1,4 +1,4 @@
-import { Type } from 'class-transformer';
+import { Transform, Type } from 'class-transformer';
 import {
   ArrayMinSize,
   IsArray,
@@ -29,30 +29,25 @@ export class CreateFurnitureUploadDto {
       'Objeto com extensão, mimetype e string base64 do modelo .glb do móvel.',
     required: true,
   })
-  @IsObject()
-  @Type(() => FileBase64Dto)
-  local: FileBase64Dto;
-  @ApiProperty({
-    example: 'true',
-    description: 'define se o móvel deve ser colocado na fileira de cima.',
-    required: true,
-  })
-  @IsBoolean()
-  colocarCima: boolean;
+  @IsString()
+  @IsIn(['true', 'false'])
+  colocarCima: string;
   @ApiProperty({
     example: 'true',
     description: 'define se o móvel deve ser colocado a direita.',
     required: true,
   })
-  @IsBoolean()
-  colocarDireita: boolean;
+  @IsString()
+  @IsIn(['true', 'false'])
+  colocarDireita: string;
   @ApiProperty({
     example: 'true',
     description: 'define se o móvel deve ser colocado a esquerda.',
     required: true,
   })
-  @IsBoolean()
-  colocarEsquerda: boolean;
+  @IsString()
+  @IsIn(['true', 'false'])
+  colocarEsquerda: string;
   @ApiProperty({
     example: 'chao',
     description: 'define se é um móvel de chão ou superior.',
@@ -66,6 +61,7 @@ export class CreateFurnitureUploadDto {
     description: 'quantidade de espaço horizontal ocupada pelo móvel.',
     required: true,
   })
+  @Transform(({ value }) => parseInt(value))
   @IsNumber()
   tamanhox: number;
   @ApiProperty({
@@ -73,6 +69,7 @@ export class CreateFurnitureUploadDto {
     description: 'quantidade de espaço vertical ocupada pelo móvel.',
     required: true,
   })
+  @Transform(({ value }) => parseInt(value))
   @IsNumber()
   tamanhoy: number;
   @ApiProperty({
@@ -81,6 +78,7 @@ export class CreateFurnitureUploadDto {
     default: null,
     required: true,
   })
+  @Transform(({ value }) => value.split(',').map((item) => item.trim()))
   @IsArray()
   @ArrayMinSize(1)
   cor: string[];
@@ -89,12 +87,15 @@ export class CreateFurnitureUploadDto {
     description: 'define se deve haver um botão no móvel.',
     required: true,
   })
-  @IsBoolean()
+  @IsString()
+  @IsIn(['true', 'false'])
   @IsOptional()
-  botao: boolean;
-  @IsBoolean()
+  botao: string;
+
+  @IsString()
+  @IsIn(['true', 'false'])
   @IsOptional()
-  canto: boolean;
+  canto: string;
   @ApiProperty({
     example: 'BALCAO',
     description: 'define a categoria a qual o móvel pertence.',
@@ -113,15 +114,9 @@ export class CreateFurnitureUploadDto {
       'Objeto com extensão, mimetype e string base64 da thumbnail do móvel.',
     required: true,
   })
-  @IsObject()
-  @Type(() => FileBase64Dto)
-  img: FileBase64Dto;
-  @ApiProperty({
-    description: 'id da coleção a qual o móvel pertencerá.',
-    required: true,
-  })
   @IsString()
   collection_id: string;
+  @Transform(({ value }) => parseInt(value))
   @IsNumber()
   @IsInt()
   order: number;

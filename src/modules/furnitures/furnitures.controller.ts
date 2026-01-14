@@ -8,6 +8,8 @@ import {
   Delete,
   Query,
   HttpCode,
+  UseInterceptors,
+  UploadedFiles,
 } from '@nestjs/common';
 import { FurnituresService } from './furnitures.service';
 import { CreateFurnitureDto } from './dto/create-furniture.dto';
@@ -15,9 +17,10 @@ import { UpdateFurnitureDto } from './dto/update-furniture.dto';
 import { CreateFurnitureUploadDto } from './dto/create-furniture-upload.dto';
 import { FurnitureParamsDto } from './dto/furnitures-params.dto';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { FileFieldsInterceptor } from '@nestjs/platform-express';
 
 @Controller('furnitures')
-@ApiTags("Móveis")
+@ApiTags('Móveis')
 export class FurnituresController {
   constructor(private readonly furnituresService: FurnituresService) {}
 
@@ -26,10 +29,26 @@ export class FurnituresController {
   @ApiOperation({
     summary: 'cria um móvel a partir dos dados informados.',
   })
+  @UseInterceptors(
+    FileFieldsInterceptor([
+      { name: 'glb', maxCount: 1 },
+      { name: 'img', maxCount: 1 },
+    ]),
+  )
   @HttpCode(201)
   @Post()
-  create(@Body() createFurnitureDto: CreateFurnitureUploadDto) {
-    return this.furnituresService.create(createFurnitureDto);
+  create(
+    @Body() createFurnitureDto: CreateFurnitureUploadDto,
+    @UploadedFiles()
+    files: { glb: Express.Multer.File[]; img: Express.Multer.File[] },
+  ) {
+    
+    console.log(createFurnitureDto);
+    return this.furnituresService.create(
+      createFurnitureDto,
+      files.glb,
+      files.img,
+    );
   }
 
   @ApiResponse({
@@ -63,12 +82,18 @@ export class FurnituresController {
   @ApiOperation({
     summary: 'atualiza um móvel a partir de seu id e dos dados informados.',
   })
+  @UseInterceptors(FileFieldsInterceptor([
+    { name: 'glb', maxCount: 1 },
+    { name: 'img', maxCount: 1 },
+  ]))
   @Patch(':id')
   update(
     @Param('id') id: string,
     @Body() updateFurnitureDto: UpdateFurnitureDto,
+    @UploadedFiles()
+    files: { glb: Express.Multer.File[]; img: Express.Multer.File[] },
   ) {
-    return this.furnituresService.update(id, updateFurnitureDto);
+    return this.furnituresService.update(id, updateFurnitureDto, files.glb, files.img);
   }
 
   @ApiResponse({ status: 204, description: 'móvel deletado com sucesso.' })

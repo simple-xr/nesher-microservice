@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { Transform } from 'class-transformer';
 import {
   ArrayMinSize,
   IsArray,
@@ -23,6 +24,7 @@ export class CreateCollectionDto {
     default: null,
     required: true,
   })
+  @Transform(({ value }) => value.split(',').map((item) => item.trim()))
   @IsArray()
   @ArrayMinSize(1)
   colors: string[];
@@ -33,6 +35,7 @@ export class CreateCollectionDto {
     default: null,
     required: true,
   })
+  @Transform(({ value }) => value.split(',').map((item) => item.trim()))
   @IsArray()
   @ArrayMinSize(1)
   color_names: string[];

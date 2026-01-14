@@ -81,12 +81,12 @@ export class FurnituresPrismaRepository implements FurnituresRepository {
       }),
     );
   }
-  async update(id: string, data: UpdateFurnitureDto): Promise<Furniture> {
+  async update(id: string, data: UpdateFurnitureDto, glb: string|undefined, img: string|undefined): Promise<Furniture> {
     return plainToInstance(
       Furniture,
       await this.prisma.furniture.update({
         where: { id },
-        data: { ...data, updated_at: new Date() },
+        data: { ...data, updated_at: new Date(), local: glb, img: img },
 
         include: {
           collection: true,
